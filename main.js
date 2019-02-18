@@ -78,8 +78,6 @@ function theImageHasLoaded() {
 
       //data-dropzone-id
 
-      piece.textContent = `Id${y}${x}`;
-
       piece.style.backgroundSize = `${numOfXPieces * 100}% ${numOfYPieces *
         100}%`;
       piece.style.backgroundPosition = `${numOfXPieces * 100 -
