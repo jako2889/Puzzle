@@ -1,0 +1,14 @@
+#container {
+  display: grid;
+  background-color: beige;
+  background-size: 100%;
+  background-repeat: no-repeat;
+  /* overflow: hidden; */
+}
+.dropzone {
+  outline: 0.5px solid grey;
+}
+
+.piece {
+  position: absolute;
+}
