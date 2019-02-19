@@ -3,11 +3,16 @@
 document.addEventListener("DOMContentLoaded", init);
 
 const imageAddress = "https://wallpapershome.com/images/pages/ico_h/475.jpg";
+//const imageAddress =
+//"https://s17346.pcdn.co/wp-content/uploads/2017/10/night-shift-memes.jpg";
 
 let dragged;
 
 let nat_height;
 let nat_width;
+
+let numOfYPieces = 3;
+let numOfXPieces = 3;
 
 function init() {
   document.querySelector("button").addEventListener("click", loadTheImage);
@@ -21,9 +26,6 @@ function loadTheImage() {
 }
 
 function theImageHasLoaded() {
-  const numOfYPieces = 3;
-  const numOfXPieces = 3;
-
   console.log(document.querySelector("img").naturalHeight);
   nat_height = document.querySelector("img").naturalHeight;
   console.log(document.querySelector("img").naturalWidth);
@@ -123,7 +125,13 @@ function theImageHasLoaded() {
       event.target.appendChild(dragged);
       dragged.style.left = event.target.style.left;
       dragged.style.top = event.target.style.top;
-      testIfSolved();
+
+      let eventId = event.target.getAttribute("data-dropzone-id");
+      let draggedId = dragged.getAttribute("data-piece-id");
+
+      if (eventId == draggedId) {
+        testIfSolved();
+      }
     } else if (event.target.className == "theBody") {
       // park the dragged elem somewhere on the body
       dragged.style.left = event.pageX + "px";
@@ -132,15 +140,36 @@ function theImageHasLoaded() {
   });
 }
 function testIfSolved() {
-  document.querySelectorAll(".dropzone").forEach(eachZone => {
-    // console.log(eachZone.dataset.dropzoneId);
-    if (eachZone.firstElementChild != null) {
-      console.log(
-        eachZone.firstElementChild.dataset.pieceId ==
-          eachZone.dataset.dropzoneId
-      );
+  let sumOfdropzones = document.querySelectorAll(".dropzone");
+  let sumOfcorrect_dropzones = 0;
+
+  for (let i = 0; i < sumOfdropzones.length; i++) {
+    let tjek = sumOfdropzones[i].hasChildNodes();
+    if (tjek == true) {
+      sumOfcorrect_dropzones++;
     }
-  });
+
+    let totalDropzones = numOfYPieces * numOfXPieces;
+    if (totalDropzones == sumOfcorrect_dropzones) {
+      greatSucces();
+    }
+  }
+
+  function greatSucces() {
+    console.log("Elsker mag");
+
+    document.querySelector("#container").style.outline = "10px solid green";
+  }
+
+  //   document.querySelectorAll(".dropzone").forEach(eachZone => {
+  //     // console.log(eachZone.dataset.dropzoneId);
+  //     if (eachZone.firstElementChild != null) {
+  //       console.log(
+  //         eachZone.firstElementChild.dataset.pieceId ==
+  //           eachZone.dataset.dropzoneId
+  //       );
+  //     }
+  //   });
 }
 
 function resetPage() {

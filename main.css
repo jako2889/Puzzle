@@ -12,3 +12,15 @@
 .piece {
   position: absolute;
 }
+
+button {
+  margin-top: 2em;
+  margin-right: 1em;
+  border: none;
+  padding: 1em;
+  font-weight: 700;
+  cursor: pointer;
+}
+button:hover {
+  opacity: 0.8;
+}
